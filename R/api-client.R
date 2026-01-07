@@ -80,8 +80,9 @@ api_client <- R6::R6Class(
     #' @param host_url A character string specifying the base URL for the API
     #'   (e.g., `"https://management.azure.com"`).
     #' @param provider An R6 credential provider object that inherits from the
-    #'   `Credential` class. If provided, the credential's `req_auth` method will
-    #'   be used for authentication. Takes precedence over `credentials`.
+    #'   `Credential` or `DefaultCredential` class. If provided, the credential's
+    #'   `req_auth` method will be used for authentication. Takes precedence over
+    #'   `credentials`.
     #' @param credentials A function that adds authentication to requests. If
     #'   both `provider` and `credentials` are `NULL`, uses [default_non_auth()].
     #'   The function should accept an httr2 request object and return a modified
@@ -140,9 +141,13 @@ api_client <- R6::R6Class(
         self$.credentials <- credentials
       } else if (!is.null(provider)) {
         # Handle credential provider if provided
-        if (!R6::is.R6(provider) || !inherits(provider, "Credential")) {
+        if (
+          !R6::is.R6(provider) ||
+            !(inherits(provider, "Credential") ||
+              inherits(provider, "DefaultCredential"))
+        ) {
           cli::cli_abort(
-            "Argument 'provider' must be an R6 object that inherits from 'Credential' class."
+            "Argument 'provider' must be an R6 object that inherits from 'Credential' or 'DefaultCredential' class."
           )
         }
         self$.provider <- provider
@@ -179,6 +184,11 @@ api_client <- R6::R6Class(
           cli::cli_alert_danger(
             "<<< status = {.val {resp$status}} | time = {format_timing(resp$timing)} secs."
           )
+          if (httr2::resp_has_body(resp)) {
+            err_content <- httr2::resp_body_string(resp)
+            cli::cli_alert_danger("<<< body:")
+            cli::cli_verbatim(err_content)
+          }
           invisible()
         })
 
@@ -336,7 +346,8 @@ api_client <- R6::R6Class(
     #'   - Other: Character string
     .resp_content = function(resp, content_type = NULL) {
       if (!httr2::resp_has_body(resp)) {
-        cli::cli_abort("response has not body.")
+        cli::cli_inform("Response has no body.")
+        return(invisible(NULL))
       }
 
       if (is.null(content_type)) {

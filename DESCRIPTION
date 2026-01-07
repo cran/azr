@@ -1,7 +1,7 @@
 Package: azr
 Title: Credential Chain for Seamless 'OAuth 2.0' Authentication to
         'Azure Services'
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person("Pedro", "Baltazar",, "pedrobtz@gmail.com", role = c("aut", "cre"))
 Description: Implements a credential chain for 'Azure OAuth 2.0' authentication 
@@ -15,13 +15,13 @@ RoxygenNote: 7.3.3
 URL: https://pedrobtz.github.io/azr/, https://github.com/pedrobtz/azr
 BugReports: https://github.com/pedrobtz/azr/issues
 Depends: R (>= 4.1)
-Imports: methods, utils, R6, cli, httr2 (>= 1.2.1), jsonlite, rlang
+Imports: utils, R6, cli, httr2 (>= 1.2.1), jsonlite, rlang
 Suggests: data.table, httpuv, clipr, processx, testthat (>= 3.0.0), vcr
         (>= 2.0.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2025-12-04 05:24:42 UTC; pbtz
+Packaged: 2026-01-07 10:01:18 UTC; pbtz
 Author: Pedro Baltazar [aut, cre]
 Maintainer: Pedro Baltazar <pedrobtz@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-12-04 05:40:02 UTC
+Date/Publication: 2026-01-07 20:20:02 UTC
