@@ -1,7 +1,7 @@
 Package: azr
 Title: Credential Chain for Seamless 'OAuth 2.0' Authentication to
         'Azure Services'
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: 
     person("Pedro", "Baltazar",, "pedrobtz@gmail.com", role = c("aut", "cre"))
 Description: Implements a credential chain for 'Azure OAuth 2.0' authentication 
@@ -20,8 +20,8 @@ Suggests: data.table, httpuv, clipr, processx, testthat (>= 3.0.0), vcr
         (>= 2.0.0)
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2026-03-30 14:07:45 UTC; pbtz
+Packaged: 2026-05-04 19:40:24 UTC; pbtz
 Author: Pedro Baltazar [aut, cre]
 Maintainer: Pedro Baltazar <pedrobtz@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-03-30 14:40:02 UTC
+Date/Publication: 2026-05-04 20:00:02 UTC
