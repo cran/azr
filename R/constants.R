@@ -22,6 +22,16 @@ azure_authority_hosts <- list(
   azure_public_cloud = "login.microsoftonline.com"
 )
 
+#' Azure Storage Endpoint Defaults
+#'
+#' @description
+#' Default endpoint suffixes for Azure Storage services.
+#'
+#' @keywords internal
+azure_storage_endpoints <- list(
+  dfs = "dfs.core.windows.net"
+)
+
 #' Common Azure OAuth Scopes
 #'
 #' @description
@@ -35,19 +45,6 @@ azure_scopes <- list(
   azure_key_vault = "https://vault.azure.net/.default",
   azure_openai = "https://cognitiveservices.azure.com/.default"
 )
-
-#' Package-level defaults environment
-#'
-#' @description
-#' Mutable environment for overriding package defaults at runtime via
-#' [set_azr_defaults()]. `NULL` means "not set" and the normal env-var /
-#' built-in fallback applies.
-#'
-#' @keywords internal
-.azr_defaults <- new.env(parent = emptyenv())
-.azr_defaults$host <- NULL
-.azr_defaults$client_id <- NULL
-.azr_defaults$tenant_id <- NULL
 
 #' Azure Environment Variable Names
 #'
@@ -77,5 +74,6 @@ environment_variables <- list(
     "AZURE_CLIENT_ID",
     "AZURE_USERNAME",
     "AZURE_PASSWORD"
-  )
+  ),
+  azure_federated_token_file = "AZURE_FEDERATED_TOKEN_FILE"
 )
